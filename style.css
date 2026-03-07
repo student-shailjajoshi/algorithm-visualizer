@@ -23,4 +23,5 @@ width:40px;
 background-color:steelblue;
 margin:2px;
 display:inline-block;
+transition:0.3s;
 }
