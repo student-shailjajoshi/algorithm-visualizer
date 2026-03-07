@@ -37,14 +37,53 @@ async function bubbleSort(){
 
 }
 
+// step 3: selection sort
+async function selectionSort(){
 
-// Step 3: buttons
-const generateBtn = document.getElementById("generate");
-const playBtn = document.getElementById("play");
-const visualizer = document.getElementById("visualizer");
+let bars=document.querySelectorAll(".bar");
+
+for(let i=0;i<bars.length;i++){
+
+let minIndex=i;
+
+bars[i].style.background="red";
+
+for(let j=i+1;j<bars.length;j++){
+
+bars[j].style.background="yellow";
+
+await sleep(500);
+
+let h1=parseInt(bars[j].style.height);
+let h2=parseInt(bars[minIndex].style.height);
+
+if(h1<h2){
+
+bars[minIndex].style.background="steelblue";
+minIndex=j;
+
+}
+
+bars[j].style.background="steelblue";
+
+}
+
+let temp=bars[i].style.height;
+bars[i].style.height=bars[minIndex].style.height;
+bars[minIndex].style.height=temp;
+
+bars[i].style.background="green";
+
+}
+
+}
+// Step 4: buttons
+const generateBtn=document.getElementById("generate");
+const playBtn=document.getElementById("play");
+const visualizer=document.getElementById("visualizer");
 
 
-// Step 4: generate bars
+// Step 5: generate bars
 generateBtn.addEventListener("click", function(){
 
   let input = document.getElementById("arrayInput").value;
@@ -68,5 +107,18 @@ generateBtn.addEventListener("click", function(){
 });
 
 
-// Step 5: play button
-playBtn.addEventListener("click", bubbleSort);
+// Step 6: play button
+
+playBtn.addEventListener("click", function(){
+
+let algo=document.getElementById("algorithm").value;
+
+if(algo==="Bubble Sort"){
+bubbleSort();
+}
+
+else if(algo==="Selection Sort"){
+selectionSort();
+}
+
+});
