@@ -1,51 +1,463 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Interactive Algorithm Learning Platform</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ALGOVIZ – Sorting Visualizer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
 </head>
-
 <body>
 
-<h1>Interactive Algorithm Learning Platform</h1>
-
-<div class="controls">
-
-    <label>Select Algorithm:</label>
-
-    <select id="algorithm">
-        <option>Bubble Sort</option>
-        <option>Selection Sort</option>
-        <option>Insertion Sort</option>
-        <option>Linear Search</option>
-        <option>Binary Search</option>
-        <option>BFS</option>
-        <option>DFS</option>
-    </select>
-
-    <br><br>
-
-    <label>Enter Array:</label>
-    <input type="text" id="arrayInput" placeholder="Example: 5,2,8,1">
-
-    <br><br>
-
-    <button id="generate">Generate</button>
-    <button id="play">Play</button>
-    <button id="pause">Pause</button>
-
-    <br><br>
-
-    <label>Speed:</label>
-    <input type="range" id="speed" min="1" max="100" value="50">
-
+<!-- ===== SIDEBAR ===== -->
+<div class="sidebar">
+  <div class="logo">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24">
+        <rect x="3" y="12" width="4" height="9"/>
+        <rect x="10" y="7" width="4" height="14"/>
+        <rect x="17" y="3" width="4" height="18"/>
+      </svg>
+    </div>
+    <div class="logo-text">ALGO<span>VIZ</span></div>
+  </div>
+  <div class="nav-label">Sorting</div>
+  <div class="nav-item active" data-algo="bubble" onclick="switchAlgo('bubble', this)">
+    <span class="nav-dot" style="background:#f97316"></span> Bubble Sort
+  </div>
+  <div class="nav-item" data-algo="insertion" onclick="switchAlgo('insertion', this)">
+    <span class="nav-dot" style="background:#3b82f6"></span> Insertion Sort
+  </div>
+  <div class="nav-item" data-algo="selection" onclick="switchAlgo('selection', this)">
+    <span class="nav-dot" style="background:#eab308"></span> Selection Sort
+  </div>
+  <div class="nav-item" data-algo="merge" onclick="switchAlgo('merge', this)">
+    <span class="nav-dot" style="background:#22c55e"></span> Merge Sort
+  </div>
+  <div class="nav-item" data-algo="quick" onclick="switchAlgo('quick', this)">
+    <span class="nav-dot" style="background:#a855f7"></span> Quick Sort
+  </div>
 </div>
 
-<div id="visualizer">
+<!-- ===== MAIN CONTENT ===== -->
+<div class="main">
 
-</div>
+  <!-- ========== BUBBLE SORT ========== -->
+  <div class="algo-info active" id="info-bubble">
+    <div class="info-section">
+      <div class="algo-tag" style="background:#f97316">SORTING</div>
+      <div class="algo-title"><span>Bubble</span> Sort</div>
+      <div class="badges">
+        <span class="badge badge-red">Worst O(n²)</span>
+        <span class="badge badge-green">Best O(n)</span>
+        <span class="badge badge-blue">Space O(1)</span>
+        <span class="badge badge-teal">Stable ✓</span>
+      </div>
+    </div>
+    <div class="detail-card">
+      <div class="detail-section-title">What is Bubble Sort?</div>
+      <p class="detail-text">Bubble Sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order. The pass through the list is repeated until the list is sorted. It gets its name because smaller elements "bubble" to the top of the list.</p>
+    </div>
+    <div class="detail-card">
+      <div class="detail-section-title">How Does It Work?</div>
+      <p class="detail-text">Imagine you have an unsorted list of numbers: <strong>[5, 1, 4, 2, 8]</strong></p>
+      <div class="pass-block">
+        <div class="pass-title">1. First Pass:</div>
+        <ul class="pass-list">
+          <li><span class="pair">(5, 1)</span> → Swap → <span class="arr-state">[1, 5, 4, 2, 8]</span></li>
+          <li><span class="pair">(5, 4)</span> → Swap → <span class="arr-state">[1, 4, 5, 2, 8]</span></li>
+          <li><span class="pair">(5, 2)</span> → Swap → <span class="arr-state">[1, 4, 2, 5, 8]</span></li>
+          <li><span class="pair">(5, 8)</span> → No swap</li>
+        </ul>
+      </div>
+      <div class="pass-block">
+        <div class="pass-title">2. Second Pass:</div>
+        <ul class="pass-list">
+          <li><span class="pair">(1, 4)</span> → No swap</li>
+          <li><span class="pair">(4, 2)</span> → Swap → <span class="arr-state">[1, 2, 4, 5, 8]</span></li>
+          <li><span class="pair">(4, 5)</span> → No swap</li>
+        </ul>
+      </div>
+      <div class="pass-block">
+        <div class="pass-title">3. Third Pass:</div>
+        <ul class="pass-list">
+          <li>No swaps needed → List is sorted</li>
+        </ul>
+      </div>
+      <p class="detail-text" style="margin-top:10px">The algorithm stops when a complete pass is made without any swaps.</p>
+    </div>
+    <div class="detail-card">
+      <div class="detail-section-title">Algorithm Steps</div>
+      <ol class="steps-list">
+        <li>Start with an unsorted array</li>
+        <li>Set a flag to track if any swaps occur</li>
+        <li>For each pair of adjacent elements:
+          <ul class="sub-list">
+            <li>Compare the two elements</li>
+            <li>If they are in the wrong order, swap them</li>
+            <li>Set the swap flag to true</li>
+          </ul>
+        </li>
+        <li>Repeat the process until a complete pass is made without any swaps</li>
+        <li>The array is now sorted</li>
+      </ol>
+    </div>
+    <div class="detail-card">
+      <div class="detail-section-title">Things to Observe</div>
+      <div class="observe-item">
+        <div class="observe-dot">•</div>
+        <div><span class="observe-label">Bubbling Up: </span><span class="observe-text">In each pass, the largest unsorted element "bubbles up" to its correct position. The sorted portion grows from right to left.</span></div>
+      </div>
+      <div class="observe-item">
+        <div class="observe-dot">•</div>
+        <div><span class="observe-label">Early Termination: </span><span class="observe-text">If a full pass completes with no swaps, the algorithm stops early. Try a nearly-sorted list to see this!</span></div>
+      </div>
+    </div>
+  </div>
 
+  <!-- ========== INSERTION SORT ========== -->
+  <div class="algo-info" id="info-insertion">
+    <div class="info-section">
+      <div class="algo-tag" style="background:#3b82f6">SORTING</div>
+      <div class="algo-title"><span>Insertion</span> Sort</div>
+      <div class="badges">
+        <span class="badge badge-red">Worst O(n²)</span>
+        <span class="badge badge-green">Best O(n)</span>
+        <span class="badge badge-blue">Space O(1)</span>
+        <span class="badge badge-teal">Stable ✓</span>
+      </div>
+    </div>
+    <div class="detail-card">
+      <div class="detail-section-title">What is Insertion Sort?</div>
+      <p class="detail-text">Insertion Sort builds the sorted array one element at a time. It picks each element from the unsorted part and inserts it into its correct position in the sorted part. It works similarly to how you sort playing cards in your hands — you pick one card and insert it in the right spot.</p>
+    </div>
+    <div class="detail-card">
+      <div class="detail-section-title">How Does It Work?</div>
+      <p class="detail-text">Imagine you have an unsorted list: <strong>[5, 3, 1, 4, 2]</strong></p>
+      <div class="pass-block">
+        <div class="pass-title">1. Start: Sorted = [5], Unsorted = [3, 1, 4, 2]</div>
+        <ul class="pass-list">
+          <li>Pick <span class="pair">3</span> → Compare with 5 → Insert before 5 → <span class="arr-state">[3, 5, 1, 4, 2]</span></li>
+        </ul>
+      </div>
+      <div class="pass-block">
+        <div class="pass-title">2. Sorted = [3, 5], Unsorted = [1, 4, 2]</div>
+        <ul class="pass-list">
+          <li>Pick <span class="pair">1</span> → Shift 5, shift 3 → Insert at start → <span class="arr-state">[1, 3, 5, 4, 2]</span></li>
+        </ul>
+      </div>
+      <div class="pass-block">
+        <div class="pass-title">3. Sorted = [1, 3, 5], Unsorted = [4, 2]</div>
+        <ul class="pass-list">
+          <li>Pick <span class="pair">4</span> → Shift 5 → Insert after 3 → <span class="arr-state">[1, 3, 4, 5, 2]</span></li>
+        </ul>
+      </div>
+      <div class="pass-block">
+        <div class="pass-title">4. Sorted = [1, 3, 4, 5], Unsorted = [2]</div>
+        <ul class="pass-list">
+          <li>Pick <span class="pair">2</span> → Shift 5, 4, 3 → Insert after 1 → <span class="arr-state">[1, 2, 3, 4, 5] ✓</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="detail-card">
+      <div class="detail-section-title">Algorithm Steps</div>
+      <ol class="steps-list">
+        <li>Start from the second element (index 1)</li>
+        <li>Store the current element as <em>key</em></li>
+        <li>Compare <em>key</em> with elements to its left:
+          <ul class="sub-list">
+            <li>Shift elements greater than <em>key</em> one position to the right</li>
+          </ul>
+        </li>
+        <li>Insert <em>key</em> at its correct position</li>
+        <li>Repeat for all remaining elements</li>
+      </ol>
+    </div>
+    <div class="detail-card">
+      <div class="detail-section-title">Things to Observe</div>
+      <div class="observe-item">
+        <div class="observe-dot">•</div>
+        <div><span class="observe-label">Building Left: </span><span class="observe-text">The left portion is always sorted. Watch how each new element finds its correct position.</span></div>
+      </div>
+      <div class="observe-item">
+        <div class="observe-dot">•</div>
+        <div><span class="observe-label">Shifting: </span><span class="observe-text">Elements shift right to make room — no full swaps, just shifts. More efficient than bubble sort in practice.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SELECTION SORT ========== -->
+  <div class="algo-info" id="info-selection">
+    <div class="info-section">
+      <div class="algo-tag" style="background:#eab308">SORTING</div>
+      <div class="algo-title"><span>Selection</span> Sort</div>
+      <div class="badges">
+        <span class="badge badge-red">Worst O(n²)</span>
+        <span class="badge badge-red">Best O(n²)</span>
+        <span class="badge badge-blue">Space O(1)</span>
+        <span class="badge badge-teal">Unstable ✗</span>
+      </div>
+    </div>
+    <div class="detail-card">
+      <div class="detail-section-title">What is Selection Sort?</div>
+      <p class="detail-text">Selection Sort divides the array into two parts: sorted and unsorted. It repeatedly selects the minimum element from the unsorted portion and places it at the end of the sorted portion. It makes at most n−1 swaps total, which is useful when write operations are costly.</p>
+    </div>
+    <div class="detail-card">
+      <div class="detail-section-title">How Does It Work?</div>
+      <p class="detail-text">Imagine you have an unsorted list: <strong>[64, 25, 12, 22, 11]</strong></p>
+      <div class="pass-block">
+        <div class="pass-title">1. First Pass — Find min in full array:</div>
+        <ul class="pass-list">
+          <li>Min = <span class="pair">11</span> → Swap with 64 → <span class="arr-state">[11, 25, 12, 22, 64]</span></li>
+        </ul>
+      </div>
+      <div class="pass-block">
+        <div class="pass-title">2. Second Pass — Find min in [25, 12, 22, 64]:</div>
+        <ul class="pass-list">
+          <li>Min = <span class="pair">12</span> → Swap with 25 → <span class="arr-state">[11, 12, 25, 22, 64]</span></li>
+        </ul>
+      </div>
+      <div class="pass-block">
+        <div class="pass-title">3. Third Pass — Find min in [25, 22, 64]:</div>
+        <ul class="pass-list">
+          <li>Min = <span class="pair">22</span> → Swap with 25 → <span class="arr-state">[11, 12, 22, 25, 64]</span></li>
+        </ul>
+      </div>
+      <div class="pass-block">
+        <div class="pass-title">4. Fourth Pass — Find min in [25, 64]:</div>
+        <ul class="pass-list">
+          <li>Min = <span class="pair">25</span> → Already in place → <span class="arr-state">[11, 12, 22, 25, 64] ✓</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="detail-card">
+      <div class="detail-section-title">Algorithm Steps</div>
+      <ol class="steps-list">
+        <li>Set the first element as the current minimum</li>
+        <li>Scan through the unsorted portion to find the actual minimum</li>
+        <li>Swap the minimum with the first unsorted element</li>
+        <li>Move the boundary of the sorted portion one step right</li>
+        <li>Repeat until the entire array is sorted</li>
+      </ol>
+    </div>
+    <div class="detail-card">
+      <div class="detail-section-title">Things to Observe</div>
+      <div class="observe-item">
+        <div class="observe-dot">•</div>
+        <div><span class="observe-label">Min Finding: </span><span class="observe-text">Each pass scans the entire unsorted portion — even if it's already in order, it still scans.</span></div>
+      </div>
+      <div class="observe-item">
+        <div class="observe-dot">•</div>
+        <div><span class="observe-label">Few Swaps: </span><span class="observe-text">Only one swap per pass — maximum n−1 swaps total, regardless of input order.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== MERGE SORT ========== -->
+  <div class="algo-info" id="info-merge">
+    <div class="info-section">
+      <div class="algo-tag" style="background:#22c55e">SORTING</div>
+      <div class="algo-title"><span>Merge</span> Sort</div>
+      <div class="badges">
+        <span class="badge badge-green">Worst O(n log n)</span>
+        <span class="badge badge-green">Best O(n log n)</span>
+        <span class="badge badge-red">Space O(n)</span>
+        <span class="badge badge-teal">Stable ✓</span>
+      </div>
+    </div>
+    <div class="detail-card">
+      <div class="detail-section-title">What is Merge Sort?</div>
+      <p class="detail-text">Merge Sort is a divide-and-conquer algorithm. It divides the array into two halves, recursively sorts each half, and then merges the two sorted halves back into one sorted array. It guarantees O(n log n) time in all cases, making it very reliable for large datasets.</p>
+    </div>
+    <div class="detail-card">
+      <div class="detail-section-title">How Does It Work?</div>
+      <p class="detail-text">Imagine you have an unsorted list: <strong>[38, 27, 43, 3]</strong></p>
+      <div class="pass-block">
+        <div class="pass-title">1. Divide Phase:</div>
+        <ul class="pass-list">
+          <li><span class="arr-state">[38, 27, 43, 3]</span> → <span class="arr-state">[38, 27]</span> and <span class="arr-state">[43, 3]</span></li>
+          <li><span class="arr-state">[38, 27]</span> → <span class="arr-state">[38]</span> and <span class="arr-state">[27]</span></li>
+          <li><span class="arr-state">[43, 3]</span> → <span class="arr-state">[43]</span> and <span class="arr-state">[3]</span></li>
+        </ul>
+      </div>
+      <div class="pass-block">
+        <div class="pass-title">2. Merge Phase (sort while merging):</div>
+        <ul class="pass-list">
+          <li>Merge <span class="pair">[38]</span> + <span class="pair">[27]</span> → <span class="arr-state">[27, 38]</span></li>
+          <li>Merge <span class="pair">[43]</span> + <span class="pair">[3]</span> → <span class="arr-state">[3, 43]</span></li>
+          <li>Merge <span class="pair">[27, 38]</span> + <span class="pair">[3, 43]</span> → <span class="arr-state">[3, 27, 38, 43] ✓</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="detail-card">
+      <div class="detail-section-title">Algorithm Steps</div>
+      <ol class="steps-list">
+        <li>If the array has 1 or 0 elements, it is already sorted — return</li>
+        <li>Find the midpoint and split into left and right halves</li>
+        <li>Recursively apply Merge Sort to the left half</li>
+        <li>Recursively apply Merge Sort to the right half</li>
+        <li>Merge the two sorted halves:
+          <ul class="sub-list">
+            <li>Compare elements from both halves one by one</li>
+            <li>Pick the smaller one and place it in result</li>
+            <li>Append any remaining elements from either half</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+    <div class="detail-card">
+      <div class="detail-section-title">Things to Observe</div>
+      <div class="observe-item">
+        <div class="observe-dot">•</div>
+        <div><span class="observe-label">Divide: </span><span class="observe-text">Array splits into halves repeatedly until single elements remain — single elements are always "sorted".</span></div>
+      </div>
+      <div class="observe-item">
+        <div class="observe-dot">•</div>
+        <div><span class="observe-label">Merge: </span><span class="observe-text">The real sorting work happens during the merge step — two sorted arrays combine into one.</span></div>
+      </div>
+      <div class="observe-item">
+        <div class="observe-dot">•</div>
+        <div><span class="observe-label">Extra Space: </span><span class="observe-text">Unlike in-place sorts, Merge Sort needs O(n) extra memory to hold temporary arrays while merging.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== QUICK SORT ========== -->
+  <div class="algo-info" id="info-quick">
+    <div class="info-section">
+      <div class="algo-tag" style="background:#a855f7">SORTING</div>
+      <div class="algo-title"><span>Quick</span> Sort</div>
+      <div class="badges">
+        <span class="badge badge-red">Worst O(n²)</span>
+        <span class="badge badge-green">Best O(n log n)</span>
+        <span class="badge badge-blue">Space O(log n)</span>
+        <span class="badge badge-teal">Unstable ✗</span>
+      </div>
+    </div>
+    <div class="detail-card">
+      <div class="detail-section-title">What is Quick Sort?</div>
+      <p class="detail-text">Quick Sort is a highly efficient divide-and-conquer sorting algorithm. It selects a pivot element and partitions the array around it — elements smaller than the pivot go left, larger go right. It then recursively sorts both partitions. It is widely used in practice due to its speed and in-place nature.</p>
+    </div>
+    <div class="detail-card">
+      <div class="detail-section-title">How Does It Work?</div>
+      <p class="detail-text">Imagine you have an unsorted list: <strong>[10, 80, 30, 90, 40, 50, 70]</strong> — Pivot = <span class="pair">70</span> (last element)</p>
+      <div class="pass-block">
+        <div class="pass-title">1. Partition around pivot 70:</div>
+        <ul class="pass-list">
+          <li>10 &lt; 70 → stays left</li>
+          <li>80 &gt; 70 → goes right</li>
+          <li>30 &lt; 70 → stays left</li>
+          <li>90 &gt; 70 → goes right</li>
+          <li>40 &lt; 70 → stays left</li>
+          <li>50 &lt; 70 → stays left</li>
+          <li>Place pivot 70 → <span class="arr-state">[10, 30, 40, 50, <strong>70</strong>, 80, 90]</span></li>
+        </ul>
+      </div>
+      <div class="pass-block">
+        <div class="pass-title">2. Recurse on sub-arrays:</div>
+        <ul class="pass-list">
+          <li>Sort left <span class="pair">[10, 30, 40, 50]</span> → already sorted</li>
+          <li>Sort right <span class="pair">[80, 90]</span> → already sorted</li>
+          <li>Final: <span class="arr-state">[10, 30, 40, 50, 70, 80, 90] ✓</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="detail-card">
+      <div class="detail-section-title">Algorithm Steps</div>
+      <ol class="steps-list">
+        <li>Choose a pivot element (commonly the last element)</li>
+        <li>Partition the array:
+          <ul class="sub-list">
+            <li>Elements smaller than pivot → move to left side</li>
+            <li>Elements greater than pivot → move to right side</li>
+            <li>Place pivot in its correct final sorted position</li>
+          </ul>
+        </li>
+        <li>Recursively apply Quick Sort on the left partition</li>
+        <li>Recursively apply Quick Sort on the right partition</li>
+        <li>Base case: a partition of size 0 or 1 is already sorted</li>
+      </ol>
+    </div>
+    <div class="detail-card">
+      <div class="detail-section-title">Things to Observe</div>
+      <div class="observe-item">
+        <div class="observe-dot">•</div>
+        <div><span class="observe-label">Pivot Placement: </span><span class="observe-text">After partitioning, the pivot is always in its final sorted position — it never moves again.</span></div>
+      </div>
+      <div class="observe-item">
+        <div class="observe-dot">•</div>
+        <div><span class="observe-label">Worst Case: </span><span class="observe-text">If the pivot is always the smallest or largest element (e.g. sorted array), performance degrades to O(n²).</span></div>
+      </div>
+      <div class="observe-item">
+        <div class="observe-dot">•</div>
+        <div><span class="observe-label">In-place: </span><span class="observe-text">Quick Sort sorts within the array itself — it only uses O(log n) stack space for recursion.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== VISUALIZER CARD ===== -->
+  <div class="viz-card">
+    <div class="viz-row">
+      <div class="viz-left">
+        <div class="bars-area" id="barsArea"></div>
+        <div class="status-row">
+          <div class="status-msg">
+            <span class="status-dot" id="statusDot"></span>
+            <span id="statusMsg" style="font-size:12px">Press Play to start</span>
+          </div>
+          <span id="stepCounter" style="font-size:12px"></span>
+        </div>
+        <div class="controls-row">
+          <button class="btn btn-play"  id="btnPlay"  onclick="togglePlay()">▶ Play</button>
+          <button class="btn btn-pause" id="btnPause" onclick="togglePlay()" disabled>⏸ Pause</button>
+          <button class="btn btn-reset" onclick="resetViz()">↺ Reset</button>
+        </div>
+        <div class="controls-row">
+          <div class="slider-row">
+            <span>n</span>
+            <input type="range" id="nSlider" min="3" max="10" value="5" oninput="onNChange(this.value)"/>
+            <span id="nVal">5</span>
+          </div>
+          <div class="slider-row">
+            <span>Speed</span>
+            <input type="range" class="speed-slider" id="speedSlider" min="1" max="5" value="1" oninput="onSpeedChange(this.value)"/>
+            <span id="speedLabel">Very slow</span>
+          </div>
+        </div>
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-label">Comparisons</div>
+            <div class="stat-val" id="statComp">0</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Swaps</div>
+            <div class="stat-val" id="statSwap">0</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Time (ms)</div>
+            <div class="stat-val" id="statTime">0</div>
+          </div>
+        </div>
+        <div class="legend-row">
+          <div class="legend-item"><div class="legend-dot" style="background:#c7d2fe"></div>Default</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div>Comparing</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#f97316"></div>Swapping</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#22c55e"></div>Sorted</div>
+        </div>
+      </div>
+      <div class="pseudocode" id="pseudocodePanel">
+        <div class="code-header">
+          <div class="code-dot r"></div>
+          <div class="code-dot y"></div>
+          <div class="code-dot g"></div>
+          <span class="code-title">PSEUDOCODE</span>
+        </div>
+        <div class="code-body" id="codeBody"></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end .main -->
 <script src="script.js"></script>
-
 </body>
 </html>
