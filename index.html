@@ -37,6 +37,15 @@
   <div class="nav-item" data-algo="quick" onclick="switchAlgo('quick', this)">
     <span class="nav-dot" style="background:#a855f7"></span> Quick Sort
   </div>
+  <div class="nav-label" style="margin-top: 20px;">SEARCHING</div>
+
+  <div class="nav-item" data-algo="linear" onclick="switchAlgo('linear', this)">
+    <span class="nav-dot" style="background: #3b82f6"></span> Linear Search
+  </div>
+
+  <div class="nav-item" data-algo="binary" onclick="switchAlgo('binary', this)">
+    <span class="nav-dot" style="background: #a855f7"></span> Binary Search
+  </div>
 </div>
 
 <!-- ===== MAIN CONTENT ===== -->
@@ -394,7 +403,105 @@
       </div>
     </div>
   </div>
+  <!-- ========== LINEAR SEARCH ========== -->
+<div class="algo-info" id="info-linear">
 
+  <div class="info-section">
+    <div class="algo-tag" style="background:#3b82f6">SEARCHING</div>
+    <div class="algo-title"><span>Linear</span> Search</div>
+
+    <div class="badges">
+      <span class="badge badge-red">Worst O(n)</span>
+      <span class="badge badge-green">Best O(1)</span>
+      <span class="badge badge-blue">Space O(1)</span>
+    </div>
+  </div>
+
+  <div class="detail-card">
+    <div class="detail-section-title">What is Linear Search?</div>
+    <p class="detail-text">
+      Linear Search is a simple searching algorithm that checks each element
+      of an array one by one until the target element is found or the entire
+      array has been checked.
+    </p>
+  </div>
+
+  <div class="detail-card">
+    <div class="detail-section-title">How Does It Work?</div>
+
+    <p class="detail-text">
+      Imagine you have an array:
+      <strong>[10, 25, 7, 42, 18]</strong>
+      and you want to find <strong>42</strong>.
+    </p>
+
+    <div class="pass-block">
+      <div class="pass-title">Step 1:</div>
+      <ul class="pass-list">
+        <li>Compare <span class="pair">10</span> with target <span class="pair">42</span> → Not found</li>
+      </ul>
+    </div>
+
+    <div class="pass-block">
+      <div class="pass-title">Step 2:</div>
+      <ul class="pass-list">
+        <li>Compare <span class="pair">25</span> with target <span class="pair">42</span> → Not found</li>
+      </ul>
+    </div>
+
+    <div class="pass-block">
+      <div class="pass-title">Step 3:</div>
+      <ul class="pass-list">
+        <li>Compare <span class="pair">7</span> with target <span class="pair">42</span> → Not found</li>
+      </ul>
+    </div>
+
+    <div class="pass-block">
+      <div class="pass-title">Step 4:</div>
+      <ul class="pass-list">
+        <li>Compare <span class="pair">42</span> with target <span class="pair">42</span> → Found ✓</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="detail-card">
+    <div class="detail-section-title">Algorithm Steps</div>
+
+    <ol class="steps-list">
+      <li>Start from the first element of the array</li>
+      <li>Compare the current element with the target</li>
+      <li>If the element matches the target, return its position</li>
+      <li>If it does not match, move to the next element</li>
+      <li>Continue until the target is found or the array ends</li>
+    </ol>
+  </div>
+
+  <div class="detail-card">
+    <div class="detail-section-title">Things to Observe</div>
+
+    <div class="observe-item">
+      <div class="observe-dot">•</div>
+      <div>
+        <span class="observe-label">One by One: </span>
+        <span class="observe-text">
+          Linear Search checks elements sequentially from left to right.
+        </span>
+      </div>
+    </div>
+
+    <div class="observe-item">
+      <div class="observe-dot">•</div>
+      <div>
+        <span class="observe-label">Early Finding: </span>
+        <span class="observe-text">
+          If the target is the first element, only one comparison is needed.
+        </span>
+      </div>
+    </div>
+
+  </div>
+
+</div>
   <!-- ===== VISUALIZER CARD ===== -->
   <div class="viz-card">
     <div class="viz-row">

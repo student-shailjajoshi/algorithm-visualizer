@@ -82,6 +82,31 @@ const pseudocodes = {
     { t: `<span class="kw">if</span> arr[j] &lt;= pivot: <span class="fn">swap</span>(++i, j)`,                                   indent: 'indent2' },
     { t: `<span class="fn">swap</span>(i<span class="op">+</span><span class="nm">1</span>, hi)`,                                     indent: 'indent1' },
   ],
+
+  linear: [
+    "FUNCTION linearSearch(arr, target)",
+    "    FOR i = 0 TO arr.length - 1",
+    "        Compare arr[i] with target",
+    "        IF arr[i] == target",
+    "            Target found",
+    "            RETURN i",
+    "    Target not found",
+    "END FUNCTION"
+  ],
+
+binary: [
+    "FUNCTION binarySearch(arr, target)",
+    "    Set left = 0, right = arr.length - 1",
+    "    WHILE left <= right",
+    "        Find middle element",
+    "        Compare middle with target",
+    "        IF middle == target",
+    "            Target found",
+    "            RETURN middle",
+    "        ELSE adjust search range",
+    "    Target not found",
+    "END FUNCTION"
+  ]
 };
 
 // =============================================
@@ -284,6 +309,40 @@ function generateSteps() {
     qs(a, 0, a.length - 1);
     s.push({ type: 'done', arr: [...a], codeLine: -1 });
   }
+  else if (currentAlgo === 'linear') {
+    const target = a[Math.floor(Math.random() * a.length)];
+
+    for (let i = 0; i < a.length; i++) {
+
+        // Compare current element with target
+        s.push({
+            type: 'compare',
+            i: i,
+            j: i,
+            codeLine: 3,
+            arr: [...a]
+        });
+
+        // Target found
+        if (a[i] === target) {
+            s.push({
+                type: 'found',
+                i: i,
+                target: target,
+                codeLine: 4,
+                arr: [...a]
+            });
+
+            break;
+        }
+    }
+
+    s.push({
+        type: 'done',
+        arr: [...a],
+        codeLine: -1
+    });
+}
 
   return s;
 }
