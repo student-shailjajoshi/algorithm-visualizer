@@ -1,0 +1,574 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f8fc">
+  <meta name="description" content="Learn Linear Search through interactive, step-by-step visualization.">
+  <title>Linear Search Visualizer | ALGOVIZ</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="../../css/visualizer.css">
+  <link rel="stylesheet" href="../../css/search.css">
+  <link rel="stylesheet" href="../../css/overhaul.css">
+  <link rel="stylesheet" href="../../css/tutor.css">
+</head>
+
+<body>
+
+  <header class="visualizer-header">
+    <div class="header-inner">
+
+      <a href="../../index.html" class="brand">
+        <span class="brand-mark">A</span>
+        <span>ALGOVIZ<span class="brand-dot">.</span></span>
+      </a>
+
+      <div class="header-center">
+        <a href="../../index.html">Algorithms</a>
+        <span>/</span>
+        <strong>Linear Search</strong>
+      </div>
+
+      <a href="../../index.html" class="back-link">← All algorithms</a>
+
+    </div>
+  </header>
+
+  <main class="search-workspace">
+
+    <section class="search-heading">
+
+      <div>
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          SEARCHING ALGORITHM · 06 / 07
+        </div>
+
+        <h1>Linear <span>Search.</span></h1>
+
+        <p>
+          Search through an array one element at a time. Compare each
+          value with your target until you find a match or reach the end.
+        </p>
+      </div>
+
+      <div class="search-complexity">
+
+        <div>
+          <span>TIME COMPLEXITY</span>
+          <strong>O(n)</strong>
+        </div>
+
+        <div>
+          <span>SPACE COMPLEXITY</span>
+          <strong>O(1)</strong>
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="search-layout">
+
+      <div class="search-toolbar">
+
+        <div class="search-mode-switch">
+
+          <button
+            class="search-mode-button active"
+            data-mode="learn"
+            type="button"
+          >
+            Learn mode
+          </button>
+
+          <button
+            class="search-mode-button"
+            data-mode="explore"
+            type="button"
+          >
+            Explore mode
+          </button>
+
+        </div>
+
+        <p class="search-mode-description" id="searchModeDescription">
+          Follow every comparison with guided explanations.
+        </p>
+
+      </div>
+
+      <div class="search-grid">
+
+        <section class="search-panel">
+
+          <div class="search-panel-header">
+
+            <div>
+              <span class="search-kicker">STEP-BY-STEP</span>
+              <h2>How it works</h2>
+            </div>
+
+            <span class="panel-tag">PSEUDOCODE</span>
+
+          </div>
+
+          <p class="search-description">
+            Start from the first element and compare each value with
+            the target. Stop when a match is found.
+          </p>
+
+          <div class="search-pseudocode" id="searchPseudocode">
+
+            <div class="search-code-line" data-line="1">
+              <span class="search-line-number">01</span>
+              <code>i = 0</code>
+            </div>
+
+            <div class="search-code-line" data-line="2">
+              <span class="search-line-number">02</span>
+              <code><span class="search-keyword">while</span> i < n</code>
+            </div>
+
+            <div class="search-code-line" data-line="3">
+              <span class="search-line-number">03</span>
+              <code><span class="search-keyword">if</span> arr[i] == target: <span class="search-keyword">return</span> i</code>
+            </div>
+
+            <div class="search-code-line" data-line="4">
+              <span class="search-line-number">04</span>
+              <code>i = i + 1</code>
+            </div>
+
+            <div class="search-code-line" data-line="5">
+              <span class="search-line-number">05</span>
+              <code><span class="search-keyword">return</span> -1</code>
+            </div>
+
+          </div>
+
+          <div class="search-explanation">
+
+            <span class="search-explanation-label">CURRENT OPERATION</span>
+
+            <p id="searchCodeExplanation">
+              Linear Search starts at index 0 and checks each element.
+            </p>
+
+          </div>
+
+          <div class="search-code-legend">
+
+            <span>
+              <i class="search-legend-current"></i>
+              Current line
+            </span>
+
+            <span>
+              <i class="search-legend-upcoming"></i>
+              Upcoming line
+            </span>
+
+          </div>
+
+        </section>
+
+        <section class="search-panel">
+
+          <div class="search-panel-header">
+
+            <div>
+              <span class="search-kicker">LIVE VISUALIZATION</span>
+              <h2>Find your element</h2>
+            </div>
+
+            <div class="search-status" id="searchStatus">
+              <i></i>
+              <span>Ready</span>
+            </div>
+
+          </div>
+
+          <div class="search-target-box">
+
+            <div class="search-target-info">
+              <span>SEARCHING FOR</span>
+              <strong id="targetDisplay">23</strong>
+            </div>
+
+            <input
+              type="number"
+              class="search-target-input"
+              id="targetInput"
+              value="23"
+              placeholder="Target"
+              aria-label="Search target"
+            >
+
+            <button
+              class="search-target-submit"
+              id="applyTargetButton"
+              type="button"
+            >
+              Set target
+            </button>
+
+          </div>
+
+          <div class="search-array-area">
+
+            <div class="search-array-topline">
+              <span>ARRAY ELEMENTS</span>
+              <strong id="searchStepCounter">Step 1 / 1</strong>
+            </div>
+
+            <div class="search-array" id="searchArray"></div>
+
+            <div class="search-array-legend">
+
+              <span>
+                <i class="search-legend-default"></i>
+                Not checked
+              </span>
+
+              <span>
+                <i class="search-legend-checked"></i>
+                Checked
+              </span>
+
+              <span>
+                <i class="search-legend-active"></i>
+                Current
+              </span>
+
+              <span>
+                <i class="search-legend-found"></i>
+                Found
+              </span>
+
+            </div>
+
+          </div>
+
+          <div class="search-result" id="searchResult">
+            <span id="searchResultText">Waiting to search</span>
+            <strong id="searchResultValue">In progress</strong>
+          </div>
+
+          <div class="search-progress">
+
+            <div class="search-progress-info">
+              <span>SEARCH PROGRESS</span>
+              <span id="searchProgressLabel">0%</span>
+            </div>
+
+            <input
+              type="range"
+              id="searchProgress"
+              min="0"
+              max="0"
+              value="0"
+              aria-label="Search progress"
+            >
+
+          </div>
+
+          <div class="search-playback">
+
+            <div class="search-playback-buttons">
+
+              <button
+                class="search-control-button"
+                id="searchPreviousButton"
+                type="button"
+                aria-label="Previous step"
+              >
+                ←
+              </button>
+
+              <button
+                class="search-control-button search-play-button"
+                id="searchPlayButton"
+                type="button"
+              >
+                <span id="searchPlayIcon">▶</span>
+                <span id="searchPlayLabel">Start search</span>
+              </button>
+
+              <button
+                class="search-control-button"
+                id="searchNextButton"
+                type="button"
+                aria-label="Next step"
+              >
+                →
+              </button>
+
+              <button
+                class="search-control-button"
+                id="searchResetButton"
+                type="button"
+                aria-label="Reset search"
+              >
+                ↺
+              </button>
+
+            </div>
+
+            <label class="search-speed-control">
+              SPEED
+
+              <select id="searchSpeed">
+                <option value="2500">Very slow</option>
+                <option value="1800" selected>Slow</option>
+                <option value="1200">Normal</option>
+                <option value="700">Fast</option>
+                <option value="250">Instant</option>
+              </select>
+            </label>
+
+          </div>
+
+        </section>
+
+      </div>
+
+      <section class="search-lesson">
+
+        <div class="search-lesson-topline">
+          <span class="search-kicker">YOUR LEARNING JOURNEY</span>
+          <span class="search-lesson-step" id="searchLessonStep">STEP 1</span>
+        </div>
+
+        <div class="search-lesson-content">
+
+          <div class="search-lesson-icon" id="searchLessonIcon">🎯</div>
+
+          <div>
+
+            <h2 id="searchLessonTitle">Let's find your target</h2>
+
+            <p id="searchLessonExplanation">
+              Linear Search starts at the first element and checks
+              each value one by one until the target is found.
+            </p>
+
+            <div class="search-lesson-next">
+              <strong>WHAT HAPPENS NEXT?</strong>
+              <span id="searchLessonNext">
+                Start with the element at index 0.
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="search-lesson-actions">
+
+          <span id="searchLessonHint">
+            The order of the array doesn't matter for Linear Search.
+          </span>
+
+          <button
+            class="search-next-button"
+            id="searchLessonNextButton"
+            type="button"
+          >
+            Next step →
+          </button>
+
+        </div>
+
+      </section>
+
+    </section>
+
+    <section class="search-below">
+
+      <section class="search-panel search-experiment">
+
+        <div class="search-panel-header">
+
+          <div>
+            <span class="search-kicker">MAKE IT YOURS</span>
+            <h2>Experiment with the array</h2>
+          </div>
+
+          <button
+            class="text-button"
+            id="searchShuffleButton"
+            type="button"
+          >
+            ↻ Shuffle array
+          </button>
+
+        </div>
+
+        <div class="search-experiment-controls">
+
+          <div class="search-size-control">
+
+            <div class="search-input-label">
+              <label for="searchSize">Array size</label>
+              <strong id="searchSizeValue">8</strong>
+            </div>
+
+            <input
+              type="range"
+              id="searchSize"
+              min="4"
+              max="16"
+              value="8"
+            >
+
+            <div class="search-range-labels">
+              <span>4 elements</span>
+              <span>16 elements</span>
+            </div>
+
+          </div>
+
+          <div class="search-custom-control">
+
+            <label for="searchCustomArray">Enter your own array</label>
+
+            <div class="search-custom-row">
+
+              <input
+                type="text"
+                id="searchCustomArray"
+                placeholder="42, 18, 65, 23, 9"
+                autocomplete="off"
+              >
+
+              <button
+                id="searchApplyArrayButton"
+                type="button"
+              >
+                Apply
+              </button>
+
+            </div>
+
+            <span class="search-input-hint" id="searchInputHint">
+              Enter comma-separated integers (maximum 20 elements).
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <section>
+
+        <div class="search-stats-heading">
+
+          <div>
+            <span class="search-kicker">LIVE PERFORMANCE</span>
+            <h2>Search statistics</h2>
+          </div>
+
+          <span class="search-stats-note">
+            Updates as the algorithm executes
+          </span>
+
+        </div>
+
+        <div class="search-stats-grid">
+
+          <div class="search-stat-card">
+            <span class="search-stat-label">COMPARISONS</span>
+            <strong id="searchComparisons">0</strong>
+            <small>Target comparisons</small>
+          </div>
+
+          <div class="search-stat-card">
+            <span class="search-stat-label">CHECKED ELEMENTS</span>
+            <strong id="searchChecked">0</strong>
+            <small>Elements already examined</small>
+          </div>
+
+          <div class="search-stat-card">
+            <span class="search-stat-label">REMAINING</span>
+            <strong id="searchRemaining">8</strong>
+            <small>Elements left to examine</small>
+          </div>
+
+          <div class="search-stat-card">
+            <span class="search-stat-label">RESULT INDEX</span>
+            <strong id="searchResultIndex">—</strong>
+            <small>Position of the target</small>
+          </div>
+
+        </div>
+
+      </section>
+
+      <section class="search-panel search-concept">
+
+        <span class="search-kicker">UNDERSTAND THE ALGORITHM</span>
+
+        <h2>How does Linear Search work?</h2>
+
+        <p>
+          Linear Search starts at the beginning of an array and examines
+          each element sequentially. At every position, it compares the
+          current element with the target. If both values match, the
+          algorithm returns the index immediately. If they do not match,
+          it moves to the next element. If the entire array is examined
+          without finding a match, the algorithm returns -1. Because it
+          does not require sorted data, Linear Search works with both
+          sorted and unsorted arrays.
+        </p>
+
+        <div class="search-concept-grid">
+
+          <div>
+            <span>BEST CASE</span>
+            <strong>O(1)</strong>
+            <small>Target is at the first position</small>
+          </div>
+
+          <div>
+            <span>AVERAGE CASE</span>
+            <strong>O(n)</strong>
+            <small>May examine many elements</small>
+          </div>
+
+          <div>
+            <span>WORST CASE</span>
+            <strong>O(n)</strong>
+            <small>Target is last or not present</small>
+          </div>
+
+        </div>
+
+      </section>
+
+    </section>
+
+    <footer class="search-footer">
+
+      <span>ALGOVIZ. · Learn algorithms visually.</span>
+
+      <span>Linear Search · Searching Algorithms</span>
+
+      <a href="../../index.html">Explore other algorithms →</a>
+
+    </footer>
+
+  </main>
+
+  <script type="module" src="../../js/algorithms/linear-search.js"></script>
+  <script src="../../js/ai-tutor.js" defer></script>
+
+</body>
+</html>

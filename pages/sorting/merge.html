@@ -1,0 +1,503 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f8fc">
+  <meta name="description" content="Learn Merge Sort through interactive, step-by-step algorithm visualization.">
+  <title>Merge Sort Visualizer | ALGOVIZ</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="../../css/visualizer.css">
+  <link rel="stylesheet" href="../../css/overhaul.css">
+  <link rel="stylesheet" href="../../css/tutor.css">
+  <script defer src="../../js/visualizer-core.js"></script>
+  <script defer src="../../js/algorithms/merge-sort.js"></script>
+  <script defer src="../../js/ai-tutor.js"></script>
+</head>
+
+<body>
+
+  <header class="visualizer-header">
+    <div class="header-inner">
+      <a href="../../index.html" class="brand">
+        <span class="brand-mark">A</span>
+        <span>ALGOVIZ<span class="brand-dot">.</span></span>
+      </a>
+
+      <div class="header-center">
+        <a href="../../index.html">Algorithms</a>
+        <span>/</span>
+        <strong>Merge Sort</strong>
+      </div>
+
+      <a href="../../index.html" class="back-link">← All algorithms</a>
+    </div>
+  </header>
+
+  <main class="workspace">
+
+    <section class="page-heading">
+      <div>
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          SORTING ALGORITHM · 04 / 07
+        </div>
+
+        <h1>Merge <span>Sort.</span></h1>
+
+        <p>
+          Divide the array into smaller sections, sort each section
+          recursively, and merge them back together in ascending order.
+        </p>
+      </div>
+
+      <div class="complexity-summary">
+        <div>
+          <span>TIME COMPLEXITY</span>
+          <strong>O(n log n)</strong>
+        </div>
+
+        <div>
+          <span>SPACE COMPLEXITY</span>
+          <strong>O(n)</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="learning-workspace">
+
+      <div class="learning-toolbar">
+        <div class="mode-switch">
+          <button class="mode-button active" data-mode="learn" type="button">
+            Learn mode
+          </button>
+
+          <button class="mode-button" data-mode="explore" type="button">
+            Explore mode
+          </button>
+        </div>
+
+        <p class="mode-description" id="modeDescription">
+          Follow every split, comparison, and merge with guided explanations.
+        </p>
+      </div>
+
+      <div class="learning-grid">
+
+        <section class="panel code-panel">
+
+          <div class="panel-header">
+            <div>
+              <span class="panel-kicker">STEP-BY-STEP</span>
+              <h2>How it works</h2>
+            </div>
+
+            <span class="panel-tag">PSEUDOCODE</span>
+          </div>
+
+          <p class="panel-description">
+            Merge Sort follows divide and conquer. It breaks the problem
+            into smaller parts before combining the sorted results.
+          </p>
+
+          <div class="code-block" id="pseudocode">
+
+            <div class="code-line" data-line="1">
+              <span class="line-number">01</span>
+              <code>mergeSort(arr, left, right)</code>
+            </div>
+
+            <div class="code-line" data-line="2">
+              <span class="line-number">02</span>
+              <code><span class="keyword">if</span> left >= right: <span class="keyword">return</span></code>
+            </div>
+
+            <div class="code-line" data-line="3">
+              <span class="line-number">03</span>
+              <code>middle = (left + right) / 2</code>
+            </div>
+
+            <div class="code-line" data-line="4">
+              <span class="line-number">04</span>
+              <code>mergeSort(left, middle)</code>
+            </div>
+
+            <div class="code-line" data-line="5">
+              <span class="line-number">05</span>
+              <code>mergeSort(middle + 1, right)</code>
+            </div>
+
+            <div class="code-line" data-line="6">
+              <span class="line-number">06</span>
+              <code>compare and place smaller element</code>
+            </div>
+
+            <div class="code-line" data-line="7">
+              <span class="line-number">07</span>
+              <code>append remaining elements</code>
+            </div>
+
+          </div>
+
+          <div class="code-explanation">
+            <span class="explanation-label">CURRENT OPERATION</span>
+
+            <p id="codeExplanationText">
+              Merge Sort begins by processing the entire array recursively.
+            </p>
+          </div>
+
+          <div class="code-legend">
+            <span>
+              <i class="legend-current"></i>
+              Current line
+            </span>
+
+            <span>
+              <i class="legend-upcoming"></i>
+              Upcoming line
+            </span>
+          </div>
+
+        </section>
+
+        <section class="panel visualization-panel">
+
+          <div class="panel-header">
+            <div>
+              <span class="panel-kicker">LIVE VISUALIZATION</span>
+              <h2>Array in action</h2>
+            </div>
+
+            <div class="run-status" id="runStatus">
+              <i></i>
+              <span>Ready</span>
+            </div>
+          </div>
+
+          <div class="legend">
+            <span>
+              <i class="legend-default"></i>
+              Unsorted
+            </span>
+
+            <span>
+              <i class="legend-compare"></i>
+              Comparing
+            </span>
+
+            <span>
+              <i class="legend-swap"></i>
+              Writing
+            </span>
+
+            <span>
+              <i class="legend-sorted"></i>
+              Sorted section
+            </span>
+          </div>
+
+          <div class="array-stage">
+            <div class="array-values" id="arrayValues"></div>
+            <div class="bars" id="bars"></div>
+            <div class="array-indices" id="arrayIndices"></div>
+          </div>
+
+          <div class="array-caption">
+            <span>ARRAY INDEX</span>
+            <span>LOWER VALUES = SHORTER BARS</span>
+          </div>
+
+          <div class="progress-area">
+            <div class="progress-info">
+              <span>ALGORITHM PROGRESS</span>
+              <span id="stepCounter">0 / 0</span>
+            </div>
+
+            <input
+              type="range"
+              id="progressSlider"
+              min="0"
+              max="0"
+              value="0"
+              aria-label="Algorithm progress"
+            >
+          </div>
+
+          <div class="playback-controls">
+
+            <div class="playback-buttons">
+
+              <button
+                class="control-button"
+                id="previousButton"
+                type="button"
+                aria-label="Previous step"
+              >
+                ←
+              </button>
+
+              <button
+                class="control-button play-button"
+                id="playButton"
+                type="button"
+              >
+                <span id="playIcon">▶</span>
+                <span id="playLabel">Start learning</span>
+              </button>
+
+              <button
+                class="control-button"
+                id="nextButton"
+                type="button"
+                aria-label="Next step"
+              >
+                →
+              </button>
+
+              <button
+                class="control-button"
+                id="resetButton"
+                type="button"
+                aria-label="Reset visualization"
+              >
+                ↺
+              </button>
+
+            </div>
+
+            <label class="speed-control">
+              SPEED
+
+              <select id="speedSelect">
+                <option value="2500">Very slow</option>
+                <option value="1800" selected>Slow</option>
+                <option value="1200">Normal</option>
+                <option value="700">Fast</option>
+                <option value="250">Instant</option>
+              </select>
+            </label>
+
+          </div>
+
+        </section>
+
+      </div>
+
+      <section class="panel lesson-panel">
+
+        <div class="lesson-topline">
+          <span class="panel-kicker">YOUR LEARNING JOURNEY</span>
+          <span class="lesson-step" id="lessonStep">STEP 1</span>
+        </div>
+
+        <div class="lesson-content">
+
+          <div class="lesson-icon" id="lessonIcon">🧩</div>
+
+          <div>
+            <h2 id="lessonTitle">Meet Merge Sort</h2>
+
+            <p id="lessonExplanation">
+              Merge Sort uses divide and conquer. It repeatedly divides
+              an array into smaller sections until every section contains
+              only one element.
+            </p>
+
+            <div class="lesson-next">
+              <strong>WHAT HAPPENS NEXT?</strong>
+
+              <span id="lessonNext">
+                Divide the array into a left half and a right half.
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="lesson-actions">
+          <span id="lessonHint">
+            A single-element array is already sorted.
+          </span>
+
+          <button
+            class="lesson-next-button"
+            id="lessonNextButton"
+            type="button"
+          >
+            Next lesson →
+          </button>
+        </div>
+
+      </section>
+
+    </section>
+
+    <section class="below-workspace">
+
+      <section class="panel experiment-panel">
+
+        <div class="panel-header">
+          <div>
+            <span class="panel-kicker">MAKE IT YOURS</span>
+            <h2>Experiment with the array</h2>
+          </div>
+
+          <button class="text-button" id="shuffleButton" type="button">
+            ↻ Shuffle array
+          </button>
+        </div>
+
+        <div class="experiment-controls">
+
+          <div class="size-control">
+            <div class="input-label">
+              <label for="sizeSlider">Array size</label>
+              <strong id="sizeValue">8</strong>
+            </div>
+
+            <input
+              type="range"
+              id="sizeSlider"
+              min="4"
+              max="16"
+              value="8"
+            >
+
+            <div class="range-labels">
+              <span>4 elements</span>
+              <span>16 elements</span>
+            </div>
+          </div>
+
+          <div class="custom-array-control">
+            <label for="customArray">Enter your own array</label>
+
+            <div class="custom-input-row">
+              <input
+                type="text"
+                id="customArray"
+                placeholder="42, 18, 65, 23, 9"
+                autocomplete="off"
+              >
+
+              <button id="applyArrayButton" type="button">
+                Apply
+              </button>
+            </div>
+
+            <span class="input-hint" id="inputHint">
+              Enter comma-separated numbers (maximum 16 elements).
+            </span>
+          </div>
+
+        </div>
+
+      </section>
+
+      <section>
+
+        <div class="stats-heading">
+          <div>
+            <span class="panel-kicker">LIVE PERFORMANCE</span>
+            <h2>Algorithm statistics</h2>
+          </div>
+
+          <span class="stats-note">
+            Updates as the algorithm executes
+          </span>
+        </div>
+
+        <div class="stats-grid">
+
+          <div class="stat-card">
+            <span class="stat-label">COMPARISONS</span>
+            <strong id="comparisonCount">0</strong>
+            <small>Elements compared during merging</small>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-label">MERGE OPERATIONS</span>
+            <strong id="swapCount">0</strong>
+            <small>Completed merge sections</small>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-label">MERGED ELEMENTS</span>
+            <strong id="sortedCount">0</strong>
+            <small>Elements in current merged section</small>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-label">MERGE DEPTH</span>
+            <strong id="passCount">0</strong>
+            <small>Completed merge operations</small>
+          </div>
+
+        </div>
+
+      </section>
+
+      <section class="panel concept-panel">
+
+        <span class="panel-kicker">UNDERSTAND THE ALGORITHM</span>
+        <h2>Divide. Conquer. Combine.</h2>
+
+        <p>
+          Merge Sort follows the divide-and-conquer approach. First,
+          it divides the array into two halves recursively until
+          individual elements remain. Since a single element is already
+          sorted, the algorithm then starts merging these smaller sections.
+          During each merge, it compares the front elements of two sorted
+          sections and places the smaller element into the resulting array.
+          This process continues until the entire array is sorted.
+        </p>
+
+        <div class="complexity-grid">
+
+          <div>
+            <span>BEST CASE</span>
+            <strong>O(n log n)</strong>
+            <small>Consistent splitting and merging</small>
+          </div>
+
+          <div>
+            <span>AVERAGE CASE</span>
+            <strong>O(n log n)</strong>
+            <small>Divide and conquer</small>
+          </div>
+
+          <div>
+            <span>WORST CASE</span>
+            <strong>O(n log n)</strong>
+            <small>Predictable performance</small>
+          </div>
+
+          <div>
+            <span>AUXILIARY SPACE</span>
+            <strong>O(n)</strong>
+            <small>Temporary arrays for merging</small>
+          </div>
+
+        </div>
+
+      </section>
+
+    </section>
+
+    <footer class="visualizer-footer">
+      <span>ALGOVIZ. · Learn algorithms visually.</span>
+      <span>Merge Sort · Sorting Algorithms</span>
+      <a href="../../index.html">Explore other algorithms →</a>
+    </footer>
+
+  </main>
+
+</body>
+</html>
