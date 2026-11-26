@@ -1,0 +1,344 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f8f9fc" />
+  <title>Bubble Sort — ALGOVIZ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/visualizer.css" />
+  <link rel="stylesheet" href="../../css/overhaul.css" />
+  <link rel="stylesheet" href="../../css/tutor.css" />
+  <script defer src="../../js/visualizer-core.js"></script>
+  <script defer src="../../js/algorithms/bubble-sort.js"></script>
+  <script defer src="../../js/ai-tutor.js"></script>
+</head>
+<body>
+  <header class="visualizer-header">
+    <div class="header-inner">
+      <a href="../../index.html" class="brand">
+        <span class="brand-mark">A</span>
+        <span>ALGOVIZ<span class="brand-dot">.</span></span>
+      </a>
+
+      <div class="header-center">
+        <a href="../../index.html">Home</a>
+        <span>/</span>
+        <a href="../../index.html#explore">Algorithms</a>
+        <span>/</span>
+        <strong>Bubble Sort</strong>
+      </div>
+
+      <a href="../../index.html#explore" class="back-link">← All algorithms</a>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="page-heading">
+      <div>
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          SORTING ALGORITHM <span>/</span> 01
+        </div>
+        <h1>Bubble <span>Sort.</span></h1>
+        <p>
+          Learn how adjacent elements move into their correct positions.
+          Follow the logic and watch every operation happen.
+        </p>
+      </div>
+
+      <div class="complexity-summary">
+        <div>
+          <span>AVERAGE TIME</span>
+          <strong>O(n²)</strong>
+        </div>
+        <div>
+          <span>SPACE</span>
+          <strong>O(1)</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="learning-workspace">
+      <div class="learning-toolbar">
+        <div class="mode-switch">
+          <button class="mode-button active" data-mode="learn">Learn mode</button>
+          <button class="mode-button" data-mode="explore">Explore mode</button>
+        </div>
+
+        <div class="mode-description" id="modeDescription">
+          Guided playback with explanations and pauses after important operations.
+        </div>
+      </div>
+
+      <div class="learning-grid">
+        <section class="panel code-panel">
+          <div class="panel-header">
+            <div>
+              <span class="panel-kicker">01 / THE LOGIC</span>
+              <h2>Follow the pseudocode</h2>
+            </div>
+            <span class="panel-tag">BUBBLE SORT</span>
+          </div>
+
+          <p class="panel-description">
+            The highlighted line shows exactly which instruction is being executed.
+          </p>
+
+          <div class="code-block" id="pseudocode">
+            <div class="code-line" data-line="1">
+              <span class="line-number">01</span>
+              <code><span class="keyword">for</span> i = 0 <span class="keyword">to</span> n - 1</code>
+            </div>
+            <div class="code-line" data-line="2">
+              <span class="line-number">02</span>
+              <code>swapped = <span class="boolean">false</span></code>
+            </div>
+            <div class="code-line" data-line="3">
+              <span class="line-number">03</span>
+              <code><span class="keyword">for</span> j = 0 <span class="keyword">to</span> n - i - 2</code>
+            </div>
+            <div class="code-line" data-line="4">
+              <span class="line-number">04</span>
+              <code><span class="keyword">if</span> arr[j] &gt; arr[j + 1]</code>
+            </div>
+            <div class="code-line" data-line="5">
+              <span class="line-number">05</span>
+              <code>swap(arr[j], arr[j + 1])</code>
+            </div>
+            <div class="code-line" data-line="6">
+              <span class="line-number">06</span>
+              <code>swapped = <span class="boolean">true</span></code>
+            </div>
+            <div class="code-line" data-line="7">
+              <span class="line-number">07</span>
+              <code><span class="keyword">if</span> swapped == <span class="boolean">false</span></code>
+            </div>
+            <div class="code-line" data-line="8">
+              <span class="line-number">08</span>
+              <code><span class="keyword">break</span></code>
+            </div>
+          </div>
+
+          <div class="code-explanation" id="codeExplanation">
+            <span class="explanation-label">WHY THIS LINE?</span>
+            <p id="codeExplanationText">
+              The outer loop controls how many passes are performed through the array.
+            </p>
+          </div>
+
+          <div class="code-legend">
+            <span><i class="legend-current"></i> Current instruction</span>
+            <span><i class="legend-upcoming"></i> Other instructions</span>
+          </div>
+        </section>
+
+        <section class="panel visualization-panel">
+          <div class="panel-header">
+            <div>
+              <span class="panel-kicker">02 / THE VISUALIZATION</span>
+              <h2>Watch it happen</h2>
+            </div>
+            <span class="run-status" id="runStatus">
+              <i></i> Ready
+            </span>
+          </div>
+
+          <div class="legend">
+            <span><i class="legend-default"></i> Unsorted</span>
+            <span><i class="legend-compare"></i> Comparing</span>
+            <span><i class="legend-swap"></i> Swapping</span>
+            <span><i class="legend-sorted"></i> Sorted</span>
+          </div>
+
+          <div class="array-stage">
+            <div class="array-values" id="arrayValues"></div>
+            <div class="bars" id="bars"></div>
+            <div class="array-indices" id="arrayIndices"></div>
+          </div>
+
+          <div class="array-caption">
+            <span>ARRAY INDEX</span>
+            <span>ELEMENT VALUE</span>
+          </div>
+
+          <div class="progress-area">
+            <div class="progress-info">
+              <span>EXECUTION PROGRESS</span>
+              <span id="stepCounter">Step 0 / 0</span>
+            </div>
+            <input id="progressSlider" type="range" min="0" max="0" value="0" />
+          </div>
+
+          <div class="playback-controls">
+            <div class="playback-buttons">
+              <button class="control-button" id="resetButton" title="Reset" aria-label="Reset">↺</button>
+              <button class="control-button" id="previousButton" title="Previous step" aria-label="Previous step">←</button>
+              <button class="control-button play-button" id="playButton">
+                <span id="playIcon">▶</span>
+                <span id="playLabel">Start learning</span>
+              </button>
+              <button class="control-button" id="nextButton" title="Next step" aria-label="Next step">→</button>
+            </div>
+
+            <label class="speed-control">
+              <span>Speed</span>
+              <select id="speedSelect">
+                <option value="2500">Very slow</option>
+                <option value="1800" selected>Slow</option>
+                <option value="1200">Normal</option>
+                <option value="700">Fast</option>
+                <option value="250">Instant</option>
+              </select>
+            </label>
+          </div>
+        </section>
+      </div>
+
+      <section class="panel lesson-panel" aria-live="polite">
+        <div class="lesson-topline">
+          <span class="panel-kicker">03 / UNDERSTAND THE STEP</span>
+          <span class="lesson-step" id="lessonStep">Getting started</span>
+        </div>
+
+        <div class="lesson-content">
+          <div class="lesson-icon" id="lessonIcon">✦</div>
+          <div>
+            <h2 id="lessonTitle">Let's understand Bubble Sort.</h2>
+            <p id="lessonExplanation">
+              Bubble Sort compares neighboring elements. If the left element is
+              larger than the right element, it swaps them. Let's go through it
+              one step at a time.
+            </p>
+            <div class="lesson-next" id="lessonNext">
+              <strong>Coming up</strong>
+              <span>We'll begin by checking the first two elements.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-actions">
+          <span id="lessonHint">Take your time. You can move through every step manually.</span>
+          <button id="lessonNextButton" class="lesson-next-button">Next step →</button>
+        </div>
+      </section>
+    </section>
+
+    <section class="below-workspace">
+      <div class="panel experiment-panel">
+        <div class="panel-header">
+          <div>
+            <span class="panel-kicker">EXPERIMENT WITH DATA</span>
+            <h2>Try your own array</h2>
+          </div>
+          <button class="text-button" id="shuffleButton">⤨ Shuffle</button>
+        </div>
+
+        <div class="experiment-controls">
+          <div class="size-control">
+            <div class="input-label">
+              <label for="sizeSlider">Array size</label>
+              <strong id="sizeValue">8</strong>
+            </div>
+            <input type="range" id="sizeSlider" min="5" max="20" value="8" />
+            <div class="range-labels">
+              <span>5 elements</span>
+              <span>20 elements</span>
+            </div>
+          </div>
+
+          <div class="custom-array-control">
+            <label for="customArray">Or enter your own values</label>
+            <div class="custom-input-row">
+              <input id="customArray" type="text" placeholder="42, 18, 65, 23, 9" />
+              <button id="applyArrayButton">Apply</button>
+            </div>
+            <span class="input-hint" id="inputHint">Enter 2–20 comma-separated numbers.</span>
+          </div>
+        </div>
+      </div>
+
+      <section class="stats-section">
+        <div class="stats-heading">
+          <div>
+            <span class="panel-kicker">LIVE METRICS</span>
+            <h2>What's happening behind the scenes?</h2>
+          </div>
+          <span class="stats-note">Updates with every step</span>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-label">COMPARISONS</span>
+            <strong id="comparisonCount">0</strong>
+            <small>Pairs of elements checked</small>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">SWAPS</span>
+            <strong id="swapCount">0</strong>
+            <small>Elements that changed places</small>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">SORTED ELEMENTS</span>
+            <strong id="sortedCount">0</strong>
+            <small>Elements in final positions</small>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">CURRENT PASS</span>
+            <strong id="passCount">0</strong>
+            <small>Full scans through the array</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel concept-panel">
+        <div class="panel-header">
+          <div>
+            <span class="panel-kicker">THE BIG IDEA</span>
+            <h2>Why is it called Bubble Sort?</h2>
+          </div>
+        </div>
+
+        <p>
+          Imagine bubbles rising to the surface of water. In Bubble Sort,
+          larger values gradually move toward the end of the array with each
+          pass. After one complete pass, the largest remaining value has
+          reached its final position.
+        </p>
+
+        <div class="complexity-grid">
+          <div>
+            <span>BEST CASE</span>
+            <strong>O(n)</strong>
+            <small>Already sorted, with early exit</small>
+          </div>
+          <div>
+            <span>AVERAGE CASE</span>
+            <strong>O(n²)</strong>
+            <small>Typical unsorted input</small>
+          </div>
+          <div>
+            <span>WORST CASE</span>
+            <strong>O(n²)</strong>
+            <small>Reverse-sorted input</small>
+          </div>
+          <div>
+            <span>SPACE</span>
+            <strong>O(1)</strong>
+            <small>Sorts in place</small>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <footer class="visualizer-footer">
+      <a href="../../index.html">← Back to ALGOVIZ</a>
+      <span>Learn visually. Think algorithmically.</span>
+      <span>01 / 07</span>
+    </footer>
+  </main>
+</body>
+</html>

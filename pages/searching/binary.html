@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#faf9f6">
+  <title>Binary Search | ALGOVIZ</title>
+  <link rel="stylesheet" href="../../css/binary-search.css">
+  <link rel="stylesheet" href="../../css/overhaul.css">
+  <link rel="stylesheet" href="../../css/tutor.css">
+</head>
+<body>
+  <header class="topbar">
+    <a href="../../index.html" class="brand">
+      <span class="brand-icon">A</span>
+      <span>ALGOVIZ</span>
+    </a>
+    <div class="breadcrumb">SEARCHING <span>/</span> BINARY SEARCH</div>
+    <a href="../../index.html" class="back-link">← All algorithms</a>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <span class="eyebrow"><i></i> SEARCHING ALGORITHM</span>
+        <h1>Binary Search<span>.</span></h1>
+        <p>Find an element by repeatedly dividing a sorted search space in half.</p>
+      </div>
+      <div class="complexities">
+        <div><span>TIME COMPLEXITY</span><strong>O(log n)</strong></div>
+        <div><span>SPACE COMPLEXITY</span><strong>O(1)</strong></div>
+      </div>
+    </section>
+
+    <div class="mode-row">
+      <div class="mode-switch">
+        <button class="mode active" data-mode="learn">Learn</button>
+        <button class="mode" data-mode="explore">Explore</button>
+      </div>
+      <span id="modeDescription">Pause at important checkpoints and understand every decision.</span>
+    </div>
+
+    <section class="workspace">
+      <section class="panel code-panel">
+        <div class="panel-heading">
+          <div><span class="section-label">01 / ALGORITHM</span><h2>Pseudocode</h2></div>
+          <span class="tag">BINARY SEARCH</span>
+        </div>
+
+        <div class="pseudocode" id="pseudocode">
+          <div class="code-line" data-line="1"><span>01</span><code>low = 0, high = n - 1</code></div>
+          <div class="code-line" data-line="2"><span>02</span><code><b>while</b> low &lt;= high</code></div>
+          <div class="code-line" data-line="3"><span>03</span><code>&nbsp;&nbsp;mid = floor((low + high) / 2)</code></div>
+          <div class="code-line" data-line="4"><span>04</span><code>&nbsp;&nbsp;<b>if</b> arr[mid] == target: <b>return</b> mid</code></div>
+          <div class="code-line" data-line="5"><span>05</span><code>&nbsp;&nbsp;<b>if</b> arr[mid] &lt; target: low = mid + 1</code></div>
+          <div class="code-line" data-line="6"><span>06</span><code>&nbsp;&nbsp;<b>else</b>: high = mid - 1</code></div>
+          <div class="code-line" data-line="7"><span>07</span><code><b>return</b> -1</code></div>
+        </div>
+
+        <div class="code-explanation">
+          <span>CURRENT OPERATION</span>
+          <p id="codeExplanation">Initialize the search boundaries.</p>
+        </div>
+
+        <div class="code-legend">
+          <span><i></i> Current line</span>
+          <span><i></i> Pseudocode</span>
+        </div>
+      </section>
+
+      <section class="panel visual-panel">
+        <div class="panel-heading">
+          <div><span class="section-label">02 / LIVE SIMULATION</span><h2>Search visualization</h2></div>
+          <span class="status" id="status">Ready</span>
+        </div>
+
+        <div class="target-box">
+          <div><label for="targetInput">TARGET VALUE</label><span>Which element are we looking for?</span></div>
+          <div class="target-controls">
+            <input id="targetInput" type="number" value="42">
+            <button id="searchButton">Search</button>
+          </div>
+        </div>
+
+        <div class="array-heading">
+          <span>ARRAY ELEMENTS</span>
+          <span>INDEX POSITION</span>
+        </div>
+
+        <div class="array-viewport">
+          <div class="array" id="array"></div>
+        </div>
+
+        <div class="pointer-legend">
+          <span><i class="low-dot"></i> LOW</span>
+          <span><i class="mid-dot"></i> MID</span>
+          <span><i class="high-dot"></i> HIGH</span>
+          <span><i class="out-dot"></i> ELIMINATED</span>
+          <span><i class="found-dot"></i> FOUND</span>
+        </div>
+
+        <div class="result" id="result" hidden>
+          <div><span id="resultTitle">Target found</span><strong id="resultValue">Index 4</strong></div>
+          <span class="result-icon" id="resultIcon">✓</span>
+        </div>
+
+        <div class="progress-block">
+          <div><span>SIMULATION PROGRESS</span><strong id="progressLabel">0%</strong></div>
+          <input id="progress" type="range" min="0" max="100" value="0">
+        </div>
+
+        <div class="controls">
+          <div class="control-buttons">
+            <button class="icon-button" id="resetButton" title="Reset">↺</button>
+            <button class="icon-button" id="previousButton" title="Previous">←</button>
+            <button class="play-button" id="playButton"><span id="playIcon">▶</span><span id="playLabel">Play</span></button>
+            <button class="icon-button" id="nextButton" title="Next">→</button>
+          </div>
+          <label class="speed-control">SPEED
+            <select id="speed">
+              <option value="slow">Slow</option>
+              <option value="normal" selected>Normal</option>
+              <option value="fast">Fast</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="step-count">STEP <strong id="stepCounter">1 / 1</strong></div>
+      </section>
+    </section>
+
+    <section class="panel lesson-panel">
+      <div class="lesson-heading">
+        <span class="section-label">03 / GUIDED LEARNING</span>
+        <span id="lessonStep">STEP 1</span>
+      </div>
+      <div class="lesson-content">
+        <div class="lesson-icon" id="lessonIcon">🎯</div>
+        <div class="lesson-copy">
+          <h2 id="lessonTitle">Meet Binary Search</h2>
+          <p id="lessonExplanation">Binary Search repeatedly divides a sorted array into smaller search ranges.</p>
+          <div class="next-action"><span>UP NEXT</span><p id="lessonNext">Calculate the middle index.</p></div>
+          <p class="hint" id="lessonHint">Binary Search requires a sorted array.</p>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <span id="lessonProgress">Follow each step to understand the algorithm.</span>
+        <button id="lessonNextButton">Continue →</button>
+      </div>
+    </section>
+
+    <section class="lower-grid">
+      <section class="panel experiment-panel">
+        <div class="panel-heading">
+          <div><span class="section-label">04 / EXPERIMENT</span><h2>Customize your array</h2></div>
+        </div>
+        <div class="size-heading"><label for="arraySize">ARRAY SIZE</label><strong id="arraySizeValue">8</strong></div>
+        <input class="size-slider" id="arraySize" type="range" min="2" max="16" value="8">
+        <div class="range-labels"><span>2 elements</span><span>16 elements</span></div>
+        <button class="secondary-button" id="randomButton">↻ Generate sorted array</button>
+        <label class="custom-label" for="customArray">CUSTOM SORTED ARRAY</label>
+        <div class="custom-controls">
+          <input id="customArray" type="text" value="9, 18, 23, 34, 42, 51, 65, 76">
+          <button id="applyArrayButton">Apply</button>
+        </div>
+        <p class="input-message" id="inputMessage">Enter comma-separated integers in ascending order.</p>
+      </section>
+
+      <section class="panel stats-panel">
+        <div class="panel-heading">
+          <div><span class="section-label">05 / LIVE ANALYTICS</span><h2>Search statistics</h2></div>
+        </div>
+        <div class="stats-grid">
+          <div class="stat"><span>COMPARISONS</span><strong id="comparisons">0</strong><small>Target comparisons</small></div>
+          <div class="stat"><span>CHECKED</span><strong id="checked">0</strong><small>Positions examined</small></div>
+          <div class="stat"><span>REMAINING</span><strong id="remaining">8</strong><small>Elements in range</small></div>
+          <div class="stat"><span>RESULT INDEX</span><strong id="resultIndex">—</strong><small>Target position</small></div>
+        </div>
+      </section>
+    </section>
+
+    <section class="panel concept-panel">
+      <span class="section-label">06 / UNDERSTANDING THE ALGORITHM</span>
+      <h2>How Binary Search works</h2>
+      <p class="concept-intro">Binary Search works on sorted data. Each comparison eliminates approximately half of the remaining search range.</p>
+      <div class="concept-grid">
+        <article><span>01</span><h3>Find the middle</h3><p>Calculate MID using the current LOW and HIGH positions.</p></article>
+        <article><span>02</span><h3>Compare</h3><p>Compare the middle element with the target value.</p></article>
+        <article><span>03</span><h3>Eliminate</h3><p>Discard the half that cannot contain the target.</p></article>
+        <article><span>04</span><h3>Repeat</h3><p>Continue until the target is found or the range is empty.</p></article>
+      </div>
+    </section>
+
+    <footer><strong>ALGOVIZ</strong><span>Understand algorithms. One step at a time.</span></footer>
+  </main>
+
+  <script src="../../js/algorithms/binary-search.js"></script>
+  <script src="../../js/ai-tutor.js" defer></script>
+</body>
+</html>
